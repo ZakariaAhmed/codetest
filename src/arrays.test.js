@@ -29,13 +29,7 @@ const people = [
 describe('getNamesOfPeopleOver', () => {
   const getNamesOfPeopleOver = limit => {
     // TODO: Complete this function to allow the test to pass
-    var myNamesArray = new Array();
-    for (var person of people){ 
-      if (person.age > limit){
-        myNamesArray.push(person.name)
-      }
-    };
-    return myNamesArray;
+    return people.filter(person => person.age > limit).map(p => p.name);
   };
 
   it('returns an array of the names of all people over the given age', () => {
@@ -46,11 +40,7 @@ describe('getNamesOfPeopleOver', () => {
 describe('getSumOfAllAges', () => {
   const getSumOfAllAges = () => {
     // TODO: Complete this function to allow the test to pass
-    var sum = 0;
-    for (var person of people){
-      sum+=person.age;
-    };
-    return sum;
+    return people.reduce((acc, person) => {return acc+person.age}, 0);
   };
 
   it('calculates the sum of all ages', () => {
@@ -61,13 +51,7 @@ describe('getSumOfAllAges', () => {
 describe('getInterests', () => {
   const getInterests = () => {
     // TODO: Complete this function to allow the test to pass
-    var allInterests = new Array();
-    for (var person of people){
-      for (interest of person.interests){
-        if (allInterests.indexOf(interest) == -1 ) allInterests.push(interest);
-        }
-      }
-    return allInterests.sort();
+    return people.map((person) => person.interests).flat().sort().filter((val,i,arr ) => arr.indexOf(val) == i);
   };
 
   it('returns a array of all interests, no duplicates, sorted', () => {
@@ -78,11 +62,10 @@ describe('getInterests', () => {
 describe('getNamesAndInterests', () => {
   const getNamesAndInterests = () => {
     // TODO: Complete this function to allow the test to pass
-    var myObject = {};
-    for (var person of people){
-      myObject[person.name] = person.interests;
-    }
-    return myObject;
+    return people.reduce((obj, val) => {
+      obj[val.name] = val.interests
+      return obj
+    }, {})
   };
 
   it('returns an object with the names as keys, and the interests as values', () => {

@@ -1,9 +1,7 @@
 describe('multiplier', () => {
-  const multiplier = (firstNum) => {
+  const multiplier = firstNum => {
     // TODO: Complete this function to allow the test to pass
-    return (secondNum) => {
-      return firstNum*secondNum;
-    }
+    return secondNum => firstNum*secondNum;
   };
 
   describe('when given a number, a function is returned which when called', () => {
